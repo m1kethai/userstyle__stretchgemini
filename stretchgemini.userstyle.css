@@ -1,45 +1,55 @@
 /* ==UserStyle==
-@name         StretchGemini: Adjustable width for Gemini chat (+ some other useful UI enhancements)
+@name         StretchGemini: Resizable Gemini chat UI & some other useful UI enhancements
 @author       m1kethai
-@description  Remove Gemini's default width restrictions in the main chat view and adjust the UI to your liking via one of the custom presets.
-@version      1.0.0
-@namespace    https://github.com/m1kethai/StretchGemini
+@description  Allows custom resizing of Gemini's main chat UI, with 5 custom width presets and a few extra optional UI tweaks
+@version      1.0
+@namespace    https://github.com/m1kethai/userstyles
 @preprocessor less
-@var select   stretchFactor             "🧘 Stretch Factor" {
+@var select   stretchFactor "Stretch factor 🧘" {
     "⛔ None":         "0",
     "🤏 Just a bit":   "1",
     "✨ Pretty roomy": "2",
     "👹 Spacious*":    "3",
     "🫨 Unbounded":    "4"
 }
+@var checkbox hideDisclaimer "Hide bottom disclaimer ⚠️"   1
 ==/UserStyle== */
 
 @-moz-document domain("gemini.google.com") {
-
     /* Default Vars: */
     /* --bard-sidenav-open-width: 320px; */
     /* --bard-sidenav-closed-width: 72px; */
     /* --bard-sidenav-open-closed-width-diff: 248px; */
 
     html {
-        .resizedChat() {
-            @defaultMw: 760px;
-            @widthMultiplier:
-                if(@stretchFactor =1, 1.33,
-                if(@stretchFactor =2, 1.66,
-                if(@stretchFactor =3, 2.0,
-                none
-            )));
-            @adjustedMw: if(
-                (isnumber(@widthMultiplier)),
-                calc(@defaultMw*@widthMultiplier),
-                none
-            );
-            max-width: @adjustedMw;
+        /* ===== EXPAND CHAT UI ===== */
+        & when (@stretchFactor >=1) {
+            .expandChatUI() {
+                @defaultMw: 760px;
+                @widthMultiplier:
+                    if(@stretchFactor =1, 1.33,
+                    if(@stretchFactor =2, 1.66,
+                    if(@stretchFactor =3, 2.0,
+                    none
+                )));
+                @adjustedMw: if(
+                    (isnumber(@widthMultiplier)),
+                    calc(@defaultMw*@widthMultiplier), none
+                );
+                max-width: @adjustedMw;
+            }
+
+            div.conversation-container {
+                .expandChatUI() !important;
+            }
         }
 
-        div.conversation-container when (@stretchFactor >=1) {
-            .resizedChat() !important;
+        /* ===== HIDE DISCLAIMER ===== */
+        div.input-area-container when(@hideDisclaimer =1)  {
+            ~ hallucination-disclaimer {
+                display: none !important;
+            }
+            padding-bottom: 0.5rem;
         }
     }
 }
