@@ -12,7 +12,8 @@
     "👹 Spacious*":    "3",
     "🫨 Unbounded":    "4"
 }
-@var checkbox hideDisclaimer "Hide bottom disclaimer ⚠️"   1
+@var checkbox hideDisclaimer "Hide bottom disclaimer ⚠️"  1
+@var checkbox hideAvatar     "Hide Gemini chat avatar 🙈" 1
 ==/UserStyle== */
 
 @-moz-document domain("gemini.google.com") {
@@ -27,10 +28,9 @@
             .expandChatUI() {
                 @defaultMw: 760px;
                 @widthMultiplier:
-                    if(@stretchFactor =1, 1.33,
-                    if(@stretchFactor =2, 1.66,
-                    if(@stretchFactor =3, 2.0,
-                    none
+                    if((@stretchFactor =1), 1.33,
+                    if((@stretchFactor =2), 1.66,
+                    if((@stretchFactor =3), 2.0, none
                 )));
                 @adjustedMw: if(
                     (isnumber(@widthMultiplier)),
@@ -38,18 +38,22 @@
                 );
                 max-width: @adjustedMw;
             }
-
             div.conversation-container {
                 .expandChatUI() !important;
             }
         }
 
         /* ===== HIDE DISCLAIMER ===== */
-        div.input-area-container when(@hideDisclaimer =1)  {
+        div.input-area-container when(@hideDisclaimer =1) {
             ~ hallucination-disclaimer {
                 display: none !important;
             }
             padding-bottom: 0.5rem;
+        }
+
+        /* ===== HIDE GEMINI AVATAR ===== */
+        div.avatar-gutter when(@hideAvatar =1) {
+            display: none !important;
         }
     }
 }
