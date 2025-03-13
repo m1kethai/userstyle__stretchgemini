@@ -3,7 +3,7 @@
 @author       m1kethai
 @description  Maximize the usable screen real estate by expanding Gemini's main chat view (or removing all width restrictions completely) - plus some extra toggles to hide certain UI elements and apply other various UI enhancements.
 @version      1.1
-@namespace    https://github.com/m1kethai/userstyles
+@namespace    https://github.com/m1kethai/userstyle__stretchgemini
 @preprocessor less
 @var select   stretchFactor "🧘 Chat view width preset" {
     "⛔ None":                "0",
