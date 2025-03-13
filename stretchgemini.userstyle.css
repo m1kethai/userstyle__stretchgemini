@@ -12,35 +12,30 @@
     "👹 Spacious*":    "3",
     "🫨 Unbounded":    "4"
 }
-@var checkbox hideDisclaimer "Hide bottom disclaimer ⚠️"  1
-@var checkbox hideAvatar     "Hide Gemini chat avatar 🙈" 1
+@var checkbox hideDisclaimer "Hide bottom disclaimer ⚠️"  0
+@var checkbox hideAvatar     "Hide Gemini chat avatar 🙈" 0
 ==/UserStyle== */
 
 @-moz-document domain("gemini.google.com") {
-    /* Default Vars: */
-    /* --bard-sidenav-open-width: 320px; */
-    /* --bard-sidenav-closed-width: 72px; */
-    /* --bard-sidenav-open-closed-width-diff: 248px; */
-
     html {
         /* ===== EXPAND CHAT UI ===== */
-        & when (@stretchFactor >=1) {
-            .expandChatUI() {
-                @defaultMw: 760px;
-                @widthMultiplier:
-                    if((@stretchFactor =1), 1.33,
-                    if((@stretchFactor =2), 1.66,
-                    if((@stretchFactor =3), 2.0, none
-                )));
-                @adjustedMw: if(
-                    (isnumber(@widthMultiplier)),
-                    calc(@defaultMw*@widthMultiplier), none
-                );
-                max-width: @adjustedMw;
-            }
-            div.conversation-container {
-                .expandChatUI() !important;
-            }
+        .expandChatUI() when (@stretchFactor >=1) {
+            /* --bard-sidenav-open-width: 320px; */
+            /* --bard-sidenav-closed-width: 72px; */
+            /* --bard-sidenav-open-closed-width-diff: 248px; */
+            @defaultMw: 760px;
+            @widthMultiplier:
+                if((@stretchFactor =1), 1.33,
+                if((@stretchFactor =2), 1.66,
+                if((@stretchFactor =3), 2.0, null
+            )));
+            @adjustedMw: if(
+                (isnumber(@widthMultiplier)), (@defaultMw*@widthMultiplier), none
+            );
+            max-width: @adjustedMw;
+        }
+        div.conversation-container {
+            .expandChatUI() !important;
         }
 
         /* ===== HIDE DISCLAIMER ===== */
@@ -51,7 +46,7 @@
             padding-bottom: 0.5rem;
         }
 
-        /* ===== HIDE GEMINI AVATAR ===== */
+        /* ===== HIDE GEMINI AVATARS ===== */
         div.avatar-gutter when(@hideAvatar =1) {
             display: none !important;
         }
