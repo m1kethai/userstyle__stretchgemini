@@ -2,8 +2,8 @@
 @name         StretchGemini - Resizable chat UI width for Gemini
 @author       m1kethai
 @description  A set of configurable presets for expanding the width of Gemini's main chat view, plus some extra toggles for hiding certain elements & other UI enhancements.
-@version      1.1
-@namespace    https://github.com/m1kethai/userstyle__stretchgemini
+@version      1.1.1
+@namespace    https://userstyles.world/style/21358/stretchgemini-resizable-chat-ui-width-for-gemini
 @preprocessor less
 @var select   stretchFactor "🧘 Chat view width preset" {
     "⛔ None":                "0",
@@ -28,9 +28,13 @@
                 if((@stretchFactor =3), 2.0, null
             )));
             @adjustedMw: if(
-                (isnumber(@widthMultiplier)), (@defaultMw*@widthMultiplier), none
+                (isnumber(@widthMultiplier)),
+                (@defaultMw*@widthMultiplier),
+                unset
             );
-            max-width: @adjustedMw;
+            &, &>user-query {
+                max-width: @adjustedMw;
+            }
         }
         div.conversation-container {
             .expandChatUI() !important;
