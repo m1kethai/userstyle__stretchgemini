@@ -1,11 +1,11 @@
 /* ==UserStyle==
-@name         StretchGemini - Resizable chat UI width for Gemini
-@author       m1kethai
-@description  A set of configurable presets for expanding the width of Gemini's main chat view, plus some extra toggles for hiding certain elements & other UI enhancements.
-@version      1.1.1
-@namespace    https://userstyles.world/style/21358/stretchgemini-resizable-chat-ui-width-for-gemini
-@preprocessor less
-@var select   stretchFactor "🧘 Chat view width preset" {
+    @name         StretchGemini - Resizable chat UI width for Gemini
+    @author       m1kethai
+    @description  A set of configurable presets for expanding the width of Gemini's main chat view, plus some extra toggles for hiding certain elements & other UI enhancements.
+    @version      1.2
+    @namespace    https://userstyles.world/style/21358/stretchgemini-resizable-chat-ui-width-for-gemini
+    @preprocessor less
+    @var select   stretchFactor "🧘 Chat view width preset" {
     "⛔ None":                "0",
     "🤏 Some breathing room": "1",
     "🙆 Pretty relaxed":      "2",
@@ -23,14 +23,14 @@
         .expandChatUI() when (@stretchFactor >=1) {
             @defaultMw: 760px;
             @widthMultiplier:
-                if((@stretchFactor =1), 1.33,
+            if((@stretchFactor =1), 1.33,
                 if((@stretchFactor =2), 1.66,
-                if((@stretchFactor =3), 2.0, null
-            )));
+                    if((@stretchFactor =3), 2.0, null
+                    )));
             @adjustedMw: if(
                 (isnumber(@widthMultiplier)),
-                (@defaultMw*@widthMultiplier),
-                unset
+                            (@defaultMw*@widthMultiplier),
+                            unset
             );
             &, &>user-query {
                 max-width: @adjustedMw;
@@ -41,15 +41,14 @@
         }
 
         & when (@enableBonusFeatures =1) {
+
             /* ===== HIDE DISCLAIMER ===== */
-            div.input-area-container when(@hideDisclaimer =1) {
-                ~ hallucination-disclaimer {
-                    display: none !important;
-                }
-                padding-bottom: 0.5rem;
+            hallucination-disclaimer when(@hideDisclaimer =1) {
+                > div p { display: none; }
+                margin-bottom: 0.75rem;
             }
 
-            /* ===== HIDE GEMINI AVATARS ===== */
+            /* ===== HIDE GEMINI AVATAR ===== */
             div.avatar-gutter when(@hideAvatar =1) {
                 display: none !important;
             }
