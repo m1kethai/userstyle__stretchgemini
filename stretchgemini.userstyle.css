@@ -1,7 +1,7 @@
 /* ==UserStyle==
-@description  Expand Gemini's chat UI. Plus some additional (optional) enhancements to declutter the UI and remove unwanted elements.
 @name           StretchGemini - Resizable Gemini Chat UI
 @author         Mike Thai <hey@mikethai.dev> (https://github.com/m1kethai)
+@description  Presets for expanding the width of Gemini's UI, plus some optional bonus enhancements to hide unwanted elements.
 @version         1.2.0
 @namespace   https://userstyles.world/style/21358/stretchgemini-resizable-chat-ui-width-for-gemini
 @preprocessor less
@@ -12,7 +12,7 @@
     "Spacious* ✨": "3",
     "Maximum 🙌": "4"
 }
-@var checkbox enableBonusFeatures "🔓 Unlock UI enhancements below 👇" 0
+@var checkbox unlockExtras "🔓 Unlock UI enhancements below 👇" 0
 @var checkbox hideDisclaimer "🙈 Hide: Hallucination disclaimer" 1
 @var checkbox hideAvatar "🙈 Hide: Inline chat avatars" 1
 ==/UserStyle== */
@@ -40,7 +40,7 @@
             .expandChatUI() !important;
         }
 
-        & when (@enableBonusFeatures =1) {
+        & when (@unlockExtras =1) {
 
             /* ===== HIDE DISCLAIMER ===== */
             hallucination-disclaimer when(@hideDisclaimer =1) {
