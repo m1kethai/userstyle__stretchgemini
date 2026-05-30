@@ -1,20 +1,20 @@
 /* ==UserStyle==
-    @name         StretchGemini - Resizable chat UI width for Gemini
-    @author       m1kethai
-    @description  A set of configurable presets for expanding the width of Gemini's main chat view, plus some extra toggles for hiding certain elements & other UI enhancements.
-    @version      1.2
-    @namespace    https://userstyles.world/style/21358/stretchgemini-resizable-chat-ui-width-for-gemini
-    @preprocessor less
-    @var select   stretchFactor "🧘 Chat view width preset" {
-    "⛔ None":                "0",
-    "🤏 Some breathing room": "1",
-    "🙆 Pretty relaxed":      "2",
-    "✨ Spacious*":           "3",
-    "🙌 Unbounded":           "4"
+@name           StretchGemini - Resizable chat UI for Gemini
+@author         m1kethai
+@description  Expand Gemini's chat UI. Plus some additional (optional) enhancements to declutter the UI and remove unwanted elements.
+@version         1.2.0
+@namespace   https://userstyles.world/style/21358/stretchgemini-resizable-chat-ui-width-for-gemini
+@preprocessor less
+@var select stretchFactor "🧘 Stretch/Width Preset" {
+    "Normal/disabled ⛔": "0",
+    "Breathing room 🤏": "1",
+    "Relaxed 🙆": "2",
+    "Spacious* ✨": "3",
+    "Maximum 🙌": "4"
 }
-@var checkbox enableBonusFeatures "👇 Enable bonus UI enhancements below 👇" 0
-@var checkbox hideDisclaimer      "⚠️ Hide disclaimer" 1
-@var checkbox hideAvatar          "🙈 Hide Gemini chat avatar" 1
+@var checkbox enableBonusFeatures "🔓 Unlock UI enhancements below 👇" 0
+@var checkbox hideDisclaimer "🙈 Hide: Hallucination disclaimer" 1
+@var checkbox hideAvatar "🙈 Hide: Inline chat avatars" 1
 ==/UserStyle== */
 
 @-moz-document domain("gemini.google.com") {
